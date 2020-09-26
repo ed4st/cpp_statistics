@@ -35,6 +35,43 @@ namespace stats{
         }
         cout << "]" << endl;
     }
+    //----------------------statistics----------------------
+    //mean
+    double mean(vector v){
+        double sum = 0;
+        for (int  i = 0; i < v.len; i++)
+        {
+            sum += v.arr[i];
+        }
+        
+        return (sum / v.len);
+    }
+
+    //mode
+    int mode(vector v){
+        int number = v.arr[0];
+        int mode = number;
+        int count = 1;
+        int countMode = 1;
+
+        for (int i = 1; i < v.len; i++)
+        {
+            if (array[i] == number) 
+            { // count occurrences of the current number
+                ++count;
+            }
+            else
+            { // now this is a different number
+                    if (count > countMode) 
+                    {
+                        countMode = count; // mode is the biggest ocurrences
+                        mode = number;
+                    }
+                count = 1; // reset count for the new number
+                number = array[i];
+            }
+        }
+    }
 }
 
 using namespace stats;
@@ -42,5 +79,6 @@ using namespace stats;
 int main(){
     vector v = random_vector();
     print(v);
+    cout << "mean: "<< mean(v) << endl;
     return 0;
 }
